@@ -1,51 +1,47 @@
 const gridContainer = document.querySelector(".grid-container");
 let cards = [];
-let firstCard, secondCard;
+let firstCard = null;
+let secondCard = null;
 let lockBoard = false;
 let score = 0;
 
-document.querySelector(".score").textContent = score;
+const scoreElement = document.querySelector(".score");
+scoreElement.textContent = score;
 
 fetch("./data/cards.json")
-.then((res) => res.json())
-.then((data) => {
-    cards = [...data, ...data];
-    shuffleCards();
-    generateCards();
-});
+    .then((response) => response.json())
+    .then((data) => {
+        cards = [...data, ...data];
+        shuffleArray(cards);
+        createCardElements(cards);
+    });
 
-function shuffleCards() {
-    let currentIndex = cards.length,
-        randomIndex,
-        temporaryValue;
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = cards[currentIndex];
-        cards[currentIndex] = cards[randomIndex];
-        cards[randomIndex] = temporaryValue;
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
 }
 
-function generateCards() {
-    for (let card of cards) {
+function createCardElements(cards) {
+    gridContainer.innerHTML = ""; // Clear existing cards if any
+    cards.forEach((card) => {
         const cardElement = document.createElement("div");
         cardElement.classList.add("card");
-        cardElement.setAttribute("data-name", card.name);
+        cardElement.dataset.name = card.name;
         cardElement.innerHTML = `
-        <div class="front">
-            <img class="front-image" src=${card.image} />
-        </div>
-        <div class="back"></div>
+            <div class="front">
+                <img class="front-image" src="${card.image}" alt="${card.name}" />
+            </div>
+            <div class="back"></div>
         `;
         gridContainer.appendChild(cardElement);
-        cardElement.addEventListener("click", flipCard);
-    }
+        cardElement.addEventListener("click", handleCardFlip);
+    });
 }
 
-function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+function handleCardFlip() {
+    if (lockBoard || this === firstCard) return;
 
     this.classList.add("flipped");
 
@@ -55,27 +51,29 @@ function flipCard() {
     }
 
     secondCard = this;
-    score++;
-    document.querySelector(".score").textContent = score;
+    updateScore();
     lockBoard = true;
 
     checkForMatch();
 }
 
-function checkForMatch() {
-    let isMatch = firstCard.dataset.name === secondCard.dataset.name;
-
-    isMatch ? disableCards() : unflipCards();
+function updateScore() {
+    score++;
+    scoreElement.textContent = score;
 }
 
-function disableCards() {
-    firstCard.removeEventListener("click", flipCard);
-    secondCard.removeEventListener("click", flipCard);
+function checkForMatch() {
+    const isMatch = firstCard.dataset.name === secondCard.dataset.name;
+    isMatch ? disableMatchedCards() : unflipMismatchedCards();
+}
 
+function disableMatchedCards() {
+    firstCard.removeEventListener("click", handleCardFlip);
+    secondCard.removeEventListener("click", handleCardFlip);
     resetBoard();
 }
 
-function unflipCards() {
+function unflipMismatchedCards() {
     setTimeout(() => {
         firstCard.classList.remove("flipped");
         secondCard.classList.remove("flipped");
@@ -84,16 +82,15 @@ function unflipCards() {
 }
 
 function resetBoard() {
-    firstCard = null;
-    secondCard = null;
-    lockBoard = false;
+    [firstCard, secondCard, lockBoard] = [null, null, false];
 }
 
 function restart() {
     resetBoard();
-    shuffleCards();
+    shuffleArray(cards);
     score = 0;
-    document.querySelector(".score").textContent = score;
-    gridContainer.innerHTML = "";
-    generateCards();
+    scoreElement.textContent = score;
+    createCardElements(cards);
 }
+
+document.querySelector(".restart-button").addEventListener("click", restart);
