@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>Memory Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h1>Memory Game</h1>
-    <div class="game-board" id="gameBoard"></div>
-    <script src="script.js"></script>
+    <div class="view-container">
+        <div class="grid-container">
+        </div>
+        <p>Cards flipped: <span class="score"></span></p>
+        <div class="actions">
+            <button onclick="restart()">Reset</button>
+        </div>
+    </div>
+    <script src="index.js"></script>
 </body>
 </html>

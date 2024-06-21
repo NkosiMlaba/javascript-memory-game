@@ -1,0 +1,10 @@
+[
+    {"image": "../assets/A.png", "name": "A"},
+    {"image": "../assets/B.png", "name": "B"},
+    {"image": "../assets/C.png", "name": "C"},
+    {"image": "../assets/D.png", "name": "D"},
+    {"image": "../assets/E.png", "name": "E"},
+    {"image": "../assets/F.png", "name": "F"},
+    {"image": "../assets/G.png", "name": "G"},
+    {"image": "../assets/H.png", "name": "H"}
+]
