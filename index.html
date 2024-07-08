@@ -17,14 +17,24 @@
         <div class="game-container">
             <div class="grid-container"></div>
             <p>Cards flipped: <span class="score"></span></p>
+            
+        </div>
+        <div class="right-div">
+            <div class="timer-container">
+                <h2>Timer</h2>
+                <p id="timer">0:00</p>
+            </div>
+
+            <div class="timer-container">
+                <h2>Score</h2>
+                <p id="scorenow">0</p>
+            </div>
+
             <div class="actions">
                 <button onclick="restart()">Reset</button>
             </div>
         </div>
-        <div class="timer-container">
-            <h2>Timer</h2>
-            <p id="timer">0:00</p>
-        </div>
+        
     </div>
     <div class="win-dialog" id="win-dialog">
         <h2>Congratulations!</h2>

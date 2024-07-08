@@ -3,33 +3,33 @@ const scoreElement = document.querySelector(".score");
 const leaderboardList = document.querySelector(".leaderboard-list");
 const winDialog = document.getElementById("win-dialog");
 const timerElement = document.getElementById("timer");
+const scorenowElement = document.getElementById("scorenow");
 
 let cards = [];
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
 let score = 0;
+let scorenow = 0;
 let playerMoves = 0;
 let playerRank = 0;
 let leaderboard = [];
 let timerInterval;
 let timerSeconds = 0;
 
-// Predefined leaderboard with 10 best players and their number of moves
 const initialLeaderboard = [
-    { name: "Player 1", moves: 15 },
-    { name: "Player 2", moves: 16 },
-    { name: "Player 3", moves: 18 },
-    { name: "Player 4", moves: 20 },
-    { name: "Player 5", moves: 22 },
-    { name: "Player 6", moves: 24 },
-    { name: "Player 7", moves: 26 },
-    { name: "Player 8", moves: 28 },
-    { name: "Player 9", moves: 30 },
-    { name: "Player 10", moves: 32 },
+    { name: "Zoey", moves: 9 },
+    { name: "Niko", moves: 11 },
+    { name: "Anna", moves: 12 },
+    { name: "Erik", moves: 16 },
+    { name: "Arthur", moves: 20 },
+    { name: "Promise", moves: 24 },
+    { name: "Lia", moves: 26 },
+    { name: "Rafael", moves: 28 },
+    { name: "Mia", moves: 30 },
+    { name: "Franco", moves: 32 },
 ];
 
-// Initialize the leaderboard
 function initializeLeaderboard() {
     leaderboard = JSON.parse(JSON.stringify(initialLeaderboard));
     playerMoves = 0;
@@ -40,6 +40,7 @@ function initializeLeaderboard() {
 initializeLeaderboard();
 
 scoreElement.textContent = score;
+scorenowElement.textContent = scorenow;
 
 fetch("./data/cards.json")
     .then((response) => response.json())
@@ -86,7 +87,7 @@ function handleCardFlip() {
 
     secondCard = this;
     updateScore();
-    playerMoves += 2; // Each pair of cards flipped counts as 2 moves
+    playerMoves += 1;
     lockBoard = true;
 
     checkForMatch();
@@ -101,6 +102,11 @@ function updateScore() {
 function checkForMatch() {
     const isMatch = firstCard.dataset.name === secondCard.dataset.name;
     isMatch ? disableMatchedCards() : unflipMismatchedCards();
+    if (isMatch) {
+        scorenow ++;
+        scorenowElement.textContent = scorenow;
+    }
+    
 }
 
 function disableMatchedCards() {
@@ -158,7 +164,6 @@ function updateLeaderboardDisplay() {
         leaderboardList.appendChild(li);
     });
 
-    // Remove animation classes after they are applied
     setTimeout(() => {
         document.querySelectorAll('.move-up, .move-down').forEach(el => {
             el.classList.remove('move-up', 'move-down');
@@ -198,13 +203,14 @@ function restart() {
     resetBoard();
     shuffleArray(cards);
     score = 0;
+    scorenow = 0;
     scoreElement.textContent = score;
+    scorenowElement.textContent = scorenow
     playerMoves = 0;
     playerRank = 0;
     createCardElements(cards);
     initializeLeaderboard();
     closeWinDialog();
-    startTimer(); // Start the timer when the game is restarted
+    startTimer();
 }
 
-// document.querySelector(".restart-button").addEventListener("click", restart);
