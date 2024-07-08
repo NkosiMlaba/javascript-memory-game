@@ -72,7 +72,7 @@ function createCardElements(cards) {
         gridContainer.appendChild(cardElement);
         cardElement.addEventListener("click", handleCardFlip);
     });
-    startTimer(); // Start the timer when the cards are created
+    startTimer();
 }
 
 function handleCardFlip() {
@@ -139,7 +139,7 @@ function updateLeaderboard(isWin = false) {
     }
 
     leaderboard.sort((a, b) => a.moves - b.moves);
-    leaderboard = leaderboard.slice(0, 10); // Keep only top 10
+    leaderboard = leaderboard.slice(0, 10);
 
     if (!isWin) {
         playerRank = leaderboard.findIndex(player => player.name === "Current Player");

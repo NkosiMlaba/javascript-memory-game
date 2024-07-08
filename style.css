@@ -76,7 +76,7 @@ p {
 }
 
 .front, .back {
-    /* backface-visibility: hidden; Testing */
+    backface-visibility: hidden;
     position: absolute;
     border-radius: 100px;
     top: 0;
