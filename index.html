@@ -8,12 +8,28 @@
 <body>
     <h1>Memory Game</h1>
     <div class="view-container">
-        <div class="grid-container">
+        <div class="leaderboard">
+            <h2>Leaderboard</h2>
+            <ul class="leaderboard-list">
+                <!-- Leaderboard entries will be inserted here -->
+            </ul>
         </div>
-        <p>Cards flipped: <span class="score"></span></p>
-        <div class="actions">
-            <button onclick="restart()">Reset</button>
+        <div class="game-container">
+            <div class="grid-container"></div>
+            <p>Cards flipped: <span class="score"></span></p>
+            <div class="actions">
+                <button onclick="restart()">Reset</button>
+            </div>
         </div>
+        <div class="timer-container">
+            <h2>Timer</h2>
+            <p id="timer">0:00</p>
+        </div>
+    </div>
+    <div class="win-dialog" id="win-dialog">
+        <h2>Congratulations!</h2>
+        <p>You won the game!</p>
+        <button onclick="closeWinDialog()">OK</button>
     </div>
     <script src="index.js"></script>
 </body>

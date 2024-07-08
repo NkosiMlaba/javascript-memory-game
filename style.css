@@ -3,6 +3,7 @@ body {
     min-width: 100vh;
     background-color: #12181f;
     color: white;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -12,11 +13,11 @@ body {
 .view-container {
     background-color: #3171bb;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row; /* Changed to row for side-by-side layout */
+    align-items: flex-start; /* Align items to the top */
     padding: 20px;
     border-radius: 10px;
+    
 }
 
 h1 {
@@ -50,6 +51,8 @@ p {
     grid-template-columns: repeat(4, 140px);
     grid-template-rows: repeat(4, 140px);
     gap: 16px;
+    margin-right: 100px;
+    margin-left: 100px;
     margin-bottom: 20px;
 }
 
@@ -73,7 +76,7 @@ p {
 }
 
 .front, .back {
-    backface-visibility: hidden;
+    backface-visibility: hidden; /*Testing*/
     position: absolute;
     border-radius: 100px;
     top: 0;
@@ -92,8 +95,93 @@ p {
     background-position: center center;
     background-size: cover;
     backface-visibility: hidden;
-    }
+}
 
 .card .front {
     transform: rotateY(180deg);
+}
+
+.leaderboard {
+    margin-right: 100px;
+    margin-left: 100px;
+    background-color: #12181f;
+    border-radius: 1rem;
+    padding: 10px;
+}
+
+.leaderboard h2 {
+    text-align: center;
+    font-size: 24px;
+}
+
+.leaderboard-list {
+    list-style: none;
+    padding: 0;
+    font-size: 18px;
+}
+
+.leaderboard-list li {
+    margin-bottom: 10px;
+    transition: transform 0.5s ease;
+}
+
+.move-up {
+    transform: translateY(-10px);
+}
+
+.move-down {
+    transform: translateY(10px);
+}
+
+.win-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: none; /* Initially hidden */
+    z-index: 1000;
+}
+
+.win-dialog h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.win-dialog p {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+
+.win-dialog button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #3171bb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timer-container {
+    margin-right: 120px;
+    margin-left: 120px;
+    text-align: center;
+    background-color: #12181f;
+    border-radius: 1rem;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.timer-container h2 {
+    font-size: 24px;
+}
+
+.timer-container p {
+    font-size: 30px;
+    font-weight: bold;
 }
