@@ -22,9 +22,10 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+module.exports = { shuffleArray };
 
 function createCardElements(cards) {
-    gridContainer.innerHTML = ""; // Clear existing cards if any
+    gridContainer.innerHTML = "";
     cards.forEach((card) => {
         const cardElement = document.createElement("div");
         cardElement.classList.add("card");
