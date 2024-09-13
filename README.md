@@ -1,23 +1,17 @@
 # Memory Game
 This is a memory game developed in html, css and javascript. It is a game where you have to match the cards with the same symbol. The main objective to make this project was to learn web development and tools used in web development. It makes use of Jest and Jsdom for testing.
 
+## Project Status ![Status](https://img.shields.io/badge/status-completed-brightgreen)
+
+1. The core functionality is completed
+
+2. Additional features that I am looking to have implemented:
+    - Adjustable difficulty (e.g. be able to choose between 4x4 or 6x6)
+    - Leaderboard database
+
 ## System Requirements:
 - A desktop with a browser
 - A linux operating system
-
-## Installation:
-    $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-    $ nvm install node
-    $ sudo apt-get install -y build-essential
-    $ npm
-    $ npm install --save-dev jest
-    $ npm install jsdom
-    $ npm install --save-dev jest-environment-jsdom
-
-
-
-## Test running:
-    $ npm test
 
 ## How to Play
 - Run index.html in your browser
