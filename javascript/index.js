@@ -30,6 +30,9 @@ const initialLeaderboard = [
     { name: "Franco", moves: 32 },
 ];
 
+/**
+ * Initializes the leaderboard with the initial data and resets player's moves and rank.
+ */
 function initializeLeaderboard() {
     leaderboard = JSON.parse(JSON.stringify(initialLeaderboard));
     playerMoves = 0;
@@ -37,19 +40,10 @@ function initializeLeaderboard() {
     updateLeaderboardDisplay();
 }
 
-initializeLeaderboard();
-
-scoreElement.textContent = score;
-scorenowElement.textContent = scorenow;
-
-fetch("./data/cards.json")
-    .then((response) => response.json())
-    .then((data) => {
-        cards = [...data, ...data];
-        shuffleArray(cards);
-        createCardElements(cards);
-    });
-
+/**
+ * Shuffles the elements of an array in place.
+ * @param {Array} array - The array to shuffle.
+ */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -57,6 +51,10 @@ function shuffleArray(array) {
     }
 }
 
+/**
+ * Creates the card elements and appends them to the grid container.
+ * @param {Array} cards - The array of card objects.
+ */
 function createCardElements(cards) {
     gridContainer.innerHTML = "";
     cards.forEach((card) => {
@@ -75,6 +73,9 @@ function createCardElements(cards) {
     startTimer();
 }
 
+/**
+ * Handles the card flip event.
+ */
 function handleCardFlip() {
     if (lockBoard || this === firstCard) return;
 
@@ -94,11 +95,17 @@ function handleCardFlip() {
     updateLeaderboard();
 }
 
+/**
+ * Updates the score and displays it.
+ */
 function updateScore() {
     score++;
     scoreElement.textContent = score;
 }
 
+/**
+ * Checks if the two flipped cards match.
+ */
 function checkForMatch() {
     const isMatch = firstCard.dataset.name === secondCard.dataset.name;
     isMatch ? disableMatchedCards() : unflipMismatchedCards();
@@ -109,6 +116,9 @@ function checkForMatch() {
     
 }
 
+/**
+ * Disables the matched cards and resets the board.
+ */
 function disableMatchedCards() {
     firstCard.removeEventListener("click", handleCardFlip);
     secondCard.removeEventListener("click", handleCardFlip);
@@ -120,6 +130,9 @@ function disableMatchedCards() {
     }
 }
 
+/**
+ * Unflips the mismatched cards after a delay.
+ */
 function unflipMismatchedCards() {
     setTimeout(() => {
         firstCard.classList.remove("flipped");
@@ -128,10 +141,17 @@ function unflipMismatchedCards() {
     }, 1000);
 }
 
+/**
+ * Resets the board variables.
+ */
 function resetBoard() {
     [firstCard, secondCard, lockBoard] = [null, null, false];
 }
 
+/**
+ * Updates the leaderboard with the current player's moves and rank.
+ * @param {boolean} isWin - Indicates if the game has been won.
+ */
 function updateLeaderboard(isWin = false) {
     const currentPlayer = { name: "Current Player", moves: playerMoves };
     if (isWin) {
@@ -148,6 +168,9 @@ function updateLeaderboard(isWin = false) {
     updateLeaderboardDisplay();
 }
 
+/**
+ * Displays the leaderboard in the leaderboard list.
+ */
 function updateLeaderboardDisplay() {
     leaderboardList.innerHTML = "";
     leaderboard.forEach((player, index) => {
@@ -171,14 +194,23 @@ function updateLeaderboardDisplay() {
     }, 500);
 }
 
+/**
+ * Shows the win dialog.
+ */
 function showWinDialog() {
     winDialog.style.display = "block";
 }
 
+/**
+ * Closes the win dialog.
+ */
 function closeWinDialog() {
     winDialog.style.display = "none";
 }
 
+/**
+ * Starts the timer.
+ */
 function startTimer() {
     timerSeconds = 0;
     timerElement.textContent = formatTime(timerSeconds);
@@ -189,16 +221,27 @@ function startTimer() {
     }, 1000);
 }
 
+/**
+ * Stops the timer.
+ */
 function stopTimer() {
     clearInterval(timerInterval);
 }
 
+/**
+ * Formats the time in minutes and seconds.
+ * @param {number} seconds - The time in seconds.
+ * @returns {string} - The formatted time.
+ */
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
 
+/**
+ * Resets the game variables and restarts the game.
+ */
 function restart() {
     resetBoard();
     shuffleArray(cards);
@@ -214,3 +257,14 @@ function restart() {
     startTimer();
 }
 
+// Entry point
+initializeLeaderboard();
+scoreElement.textContent = score;
+scorenowElement.textContent = scorenow;
+fetch("./data/cards.json")
+    .then((response) => response.json())
+    .then((data) => {
+        cards = [...data, ...data];
+        shuffleArray(cards);
+        createCardElements(cards);
+    });
