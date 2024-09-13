@@ -15,7 +15,7 @@ This is a memory game developed in html, css and javascript. It is a game where 
 
 ## How to Play
 - Run index.html in your browser
-- Click on the cards
+- Click on the cards and try to match the cards quickly
     
 ## Contributing
 
