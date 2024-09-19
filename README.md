@@ -3,7 +3,7 @@ This is a memory game developed in html, css and javascript. It is a game where 
 
 ## Output
 ![Project Logo](program-output/vlcsnap-2024-09-19-07h21m23s312.png)
-![Demo Video](program-output/memorygamevideo.mp4)
+![Demo Video](program-output/memorygamevideo.gif)
 ![Project Logo](program-output/vlcsnap-2024-09-19-07h20m48s035.png)
 
 
