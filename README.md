@@ -1,6 +1,12 @@
 # Memory Game
 This is a memory game developed in html, css and javascript. It is a game where you have to match the cards with the same symbol. The main objective to make this project was to learn web development and tools used in web development. It makes use of Jest and Jsdom for testing.
 
+## Output
+![Project Logo](program-output/vlcsnap-2024-09-19-07h21m23s312.png)
+![Demo Video](program-output/memorygamevideo.mp4)
+![Project Logo](program-output/vlcsnap-2024-09-19-07h20m48s035.png)
+
+
 ## Project Status ![Status](https://img.shields.io/badge/status-completed-brightgreen)
 
 1. The core functionality is completed
