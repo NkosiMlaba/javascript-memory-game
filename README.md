@@ -1,8 +1,9 @@
 # Memory Game
 This is a memory game developed in html, css and javascript. It is a game where you have to match the cards with the same symbol. The main objective to make this project was to learn web development and tools used in web development.
-## Output
-![Demo Video](program-output/memorygamevideo.gif)
 
+
+## Output ([gallery](program-output/Gallery.md))
+![Demo Video](program-output/memorygamevideo.gif)
 
 
 ## Project Status ![Status](https://img.shields.io/badge/status-completed-brightgreen)
